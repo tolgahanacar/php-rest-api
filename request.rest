@@ -1,1 +1,41 @@
-GET http://localhost/api/index.php
+// GET Method
+
+GET http://localhost/rest-api/index.php HTTP/1.1
+
+// Single GET Method
+
+GET http://localhost/rest-api/index.php?id=200 HTTP/1.1
+
+// POST Method
+
+POST http://localhost/rest-api/index.php HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+first_name=tolgahan
+&last_name=acar 
+&age=20
+&city=Istanbul
+&ip=192.168.1.1
+
+// DELETE Method
+
+DELETE http://localhost/rest-api/index.php?id=200 HTTP/1.1
+
+// PUT Method
+
+PUT http://localhost/rest-api/index.php HTTP/1.1
+content-type: application/json
+
+{
+         "id": 199,
+         "first_name": "Tolgahan",
+         "last_name": "Acar",
+         "age":21,
+         "city":"Izmir",
+         "ip":"192.168.1.1"
+}
+
+
+
+
+
