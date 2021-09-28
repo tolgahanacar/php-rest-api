@@ -7,7 +7,7 @@ $jsonArray['error'] = FALSE; // Başlangıçta hata yok olarak kabul edelim.
 $_code = 200; // HTTP Ok olarak durumu kabul edelim. 
 $request_method = $_SERVER['REQUEST_METHOD'];
 
-if ($request_method === "GET") {
+if ($request_method === "GET") { //GET Method
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $query = $db->prepare("SELECT * FROM users WHERE id = :id");
@@ -23,7 +23,7 @@ if ($request_method === "GET") {
         $jsonArray["User information"] = $query2;
         $_code = 200;
     }
-} else if ($request_method === "POST") {
+} else if ($request_method === "POST") { //POST Method
     $firstName = Security($_POST['first_name']);
     $lastName  = Security($_POST['last_name']);
     $age       = Security($_POST['age']);
@@ -48,7 +48,7 @@ if ($request_method === "GET") {
         $_code = 404;
         $jsonArray['errorMessage'] = "Data sending failed!";
     }
-} else if ($request_method === "DELETE") {
+} else if ($request_method === "DELETE") { //DELETE Method
     $id = Security($_GET['id']);
     $delete = $db->prepare("DELETE FROM users WHERE id = :id");
     $delete->bindParam(":id", $id, PDO::PARAM_INT);
