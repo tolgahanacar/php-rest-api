@@ -44,8 +44,6 @@ function HttpStatus($code)
         504 => 'Gateway Timeout',
         505 => 'HTTP Version Not Supported'
     );
-
-    // gönderilen kod listede yok ise 500 durum kodu gönderilsin. 
     return $status[$code] ? $status[$code] : $status[500];
 }
 
@@ -53,20 +51,6 @@ function SetHeader($code){
     header("HTTP/1.1 ".$code." ".HttpStatus($code));
     header("Content-Type: application/json; charset=utf-8");
 }
-
-// function kullaniciAdi($s) {
-//     $tr = array('ş','Ş','ı','İ','ğ','Ğ','ü','Ü','ö','Ö','Ç','ç');
-//     $eng = array('s','s','i','i','g','g','u','u','o','o','c','c');
-//     $s = str_replace($tr,$eng,$s);
-//     $s = strtolower($s);
-//     $s = preg_replace('/&.+?;/', '', $s);
-//     $s = preg_replace('/[^%a-z0-9 _-]/', '', $s);
-//     $s = preg_replace('/\s+/', '-', $s);
-//     $s = preg_replace('|-+|', '-', $s);
-//     $s = trim($s, '-');
- 
-//     return $s;
-// }
 
 function Security($value){
     $trim = trim($value);
