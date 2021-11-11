@@ -74,29 +74,29 @@ content-type: application/json
     <td>GET</td>
     <td>id=1</td>
     <td>http://localhost/rest-api/index.php</td>
-    <td>none</td>
-    <td>none</td>
+    <td>x</td>
+    <td>x</td>
   </tr>
   <tr>
     <td>POST</td>
-    <td>none</td>
+    <td>x</td>
     <td>http://localhost/rest-api/index.php</td>
     <td>username=tolgahan</td>
-    <td>none</td>
+    <td>x</td>
   </tr>
   <tr>
     <td>PUT</td>
-    <td>none</td>
+    <td>x</td>
     <td>http://localhost/rest-api/index.php</td>
-    <td>none</td>
+    <td>x</td>
     <td>{"id":1, "username":"tolgahan0"}</td>
   </tr>
   <tr>
     <td>DELETE</td>
     <td>id=100</td>
     <td>http://localhost/rest-api/index.php</td>
-    <td>none</td>
-    <td>none</td>
+    <td>x</td>
+    <td>x</td>
   </tr>
 </table>
 
