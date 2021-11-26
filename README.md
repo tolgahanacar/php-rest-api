@@ -1,3 +1,11 @@
+<a href='https://tolgahanacar.net'>
+    <img src="https://img.shields.io/github/v/release/tolgahanacar/php-rest-api">
+  <a/>
+  <a href='https://tolgahanacar.net'>
+    <img src="https://img.shields.io/github/watchers/tolgahanacar/php-rest-api?style=social">
+  <a/><br>
+  
+
 # php-rest-api
 PHP Rest(Restful) API
 <h2>Database structure</h2>
