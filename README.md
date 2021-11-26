@@ -1,3 +1,4 @@
+
 <a href='https://tolgahanacar.net'>
     <img src="https://img.shields.io/github/v/release/tolgahanacar/php-rest-api">
   <a/>
@@ -5,7 +6,10 @@
     <img src="https://img.shields.io/github/watchers/tolgahanacar/php-rest-api?style=social">
   <a/><br>
   
-
+<a href='https://php.net'>
+    <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white">
+  <a/>
+    
 # php-rest-api
 PHP Rest(Restful) API
 <h2>Database structure</h2>
