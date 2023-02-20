@@ -1,37 +1,25 @@
-
-<a href='https://tolgahanacar.net'>
-    <img src="https://img.shields.io/github/v/release/tolgahanacar/php-rest-api">
-  <a/>
-  <a href='https://tolgahanacar.net'>
-    <img src="https://img.shields.io/github/watchers/tolgahanacar/php-rest-api?style=social">
-  <a/><br>
-  
-<a href='https://php.net'>
-    <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white">
-  <a/>
-    
 # php-rest-api
 PHP Rest(Restful) API
 <h2>Database structure</h2>
 <table>
-  <tr>
-    <th>id</th>
-    <th>username</th>
-    <th>first_name</th>
-    <th>last_name</th>
-    <th>email</th>
-    <th>updateDate</th>
-    <th>createDate</th>
-  </tr>
-  <tr>
-    <td>int [AUTO_INCREMENT]</td>
-    <td>varchar(60)</td>
-    <td>varchar(50)</td>
-    <td>varchar(50)</td>
-    <td>varchar(60)</td>
-    <td>TIMESTAMP [CURRENT_TIMESTAMP]</td>
-    <td>TIMESTAMP</td>
-  </tr>
+    <tr>
+        <th>id</th>
+        <th>username</th>
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>email</th>
+        <th>updateDate</th>
+        <th>createDate</th>
+    </tr>
+    <tr>
+        <td>int [AUTO_INCREMENT]</td>
+        <td>varchar(60)</td>
+        <td>varchar(50)</td>
+        <td>varchar(50)</td>
+        <td>varchar(60)</td>
+        <td>TIMESTAMP [CURRENT_TIMESTAMP]</td>
+        <td>TIMESTAMP</td>
+    </tr>
 </table>
 
 ## request.rest
@@ -51,7 +39,7 @@ Content-Type: application/x-www-form-urlencoded
 
 username=tolgahan01
 &first_name=tolgahan
-&last_name=acar 
+&last_name=acar
 &email=tolga@tolgahanacar.net
 
 // DELETE Method
@@ -64,57 +52,50 @@ PUT http://localhost/rest-api/index.php HTTP/1.1
 content-type: application/json
 
 {
-    "id": 101,
-    "username": "tolgahan02",
-    "first_name": "tolgahan",
-    "last_name": "acar",
-    "email": "info@tolgahanacar.net"
+"id": 101,
+"username": "tolgahan02",
+"first_name": "tolgahan",
+"last_name": "acar",
+"email": "info@tolgahanacar.net"
 }
 
 ```
 
 ## Postman
 <table>
-  <tr>
-    <th>Request</th>
-    <th>Params</th>
-    <th>Query</th>
-    <th>form-data</th>
-    <th>x-www-form-urlencoded</th>
-  </tr>
-  <tr>
-    <td>GET</td>
-    <td>id=1</td>
-    <td>http://localhost/rest-api/index.php</td>
-    <td>x</td>
-    <td>x</td>
-  </tr>
-  <tr>
-    <td>POST</td>
-    <td>x</td>
-    <td>http://localhost/rest-api/index.php</td>
-    <td>username=tolgahan</td>
-    <td>x</td>
-  </tr>
-  <tr>
-    <td>PUT</td>
-    <td>x</td>
-    <td>http://localhost/rest-api/index.php</td>
-    <td>x</td>
-    <td>{"id":1, "username":"tolgahan0"}</td>
-  </tr>
-  <tr>
-    <td>DELETE</td>
-    <td>id=100</td>
-    <td>http://localhost/rest-api/index.php</td>
-    <td>x</td>
-    <td>x</td>
-  </tr>
+    <tr>
+        <th>Request</th>
+        <th>Params</th>
+        <th>Query</th>
+        <th>form-data</th>
+        <th>x-www-form-urlencoded</th>
+    </tr>
+    <tr>
+        <td>GET</td>
+        <td>id=1</td>
+        <td>http://localhost/rest-api/index.php</td>
+        <td>x</td>
+        <td>x</td>
+    </tr>
+    <tr>
+        <td>POST</td>
+        <td>x</td>
+        <td>http://localhost/rest-api/index.php</td>
+        <td>username=tolgahan</td>
+        <td>x</td>
+    </tr>
+    <tr>
+        <td>PUT</td>
+        <td>x</td>
+        <td>http://localhost/rest-api/index.php</td>
+        <td>x</td>
+        <td>{"id":1, "username":"tolgahan0"}</td>
+    </tr>
+    <tr>
+        <td>DELETE</td>
+        <td>id=100</td>
+        <td>http://localhost/rest-api/index.php</td>
+        <td>x</td>
+        <td>x</td>
+    </tr>
 </table>
-
-
-
-
-
-
-
