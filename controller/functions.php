@@ -1,7 +1,7 @@
 <?php
-function HttpStatus($code)
-{
-    $status = array(
+
+function HttpStatus(int $code): string {
+    $status = [
         100 => 'Continue',
         101 => 'Switching Protocols',
         200 => 'OK',
@@ -43,19 +43,16 @@ function HttpStatus($code)
         503 => 'Service Unavailable',
         504 => 'Gateway Timeout',
         505 => 'HTTP Version Not Supported'
-    );
-    return $status[$code] ? $status[$code] : $status[500];
+    ];
+
+    return $status[$code] ?? $status[500];
 }
 
-function SetHeader($code){
-    header("HTTP/1.1 ".$code." ".HttpStatus($code));
+function SetHeader(int $code): void {
+    header("HTTP/1.1 $code " . HttpStatus($code));
     header("Content-Type: application/json; charset=utf-8");
 }
 
-function Security($value){
-    $trim = trim($value);
-    $strip_tags = strip_tags($trim);
-    $htmlspecialchars = htmlspecialchars($strip_tags, ENT_QUOTES);
-    $return = $htmlspecialchars;
-    return $return;
+function Security(string $value): string {
+    return htmlspecialchars(strip_tags(trim($value)), ENT_QUOTES);
 }
