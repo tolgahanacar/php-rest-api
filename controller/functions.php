@@ -45,14 +45,15 @@ function HttpStatus(int $code): string {
         505 => 'HTTP Version Not Supported'
     ];
 
-    return $status[$code] ?? $status[500];
+    return $status[$code] ?? 'Unknown Status Code';
 }
 
 function SetHeader(int $code): void {
-    header("HTTP/1.1 $code " . HttpStatus($code));
+    $statusText = HttpStatus($code);
+    header("HTTP/1.1 $code $statusText");
     header("Content-Type: application/json; charset=utf-8");
 }
 
 function Security(string $value): string {
-    return htmlspecialchars(strip_tags(trim($value)), ENT_QUOTES);
+    return filter_var(trim($value), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 }
