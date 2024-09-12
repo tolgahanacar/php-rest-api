@@ -14,18 +14,23 @@ function respond_with_error($message, $code) {
     $_code = $code;
 }
 
+function getUserById($id) {
+    global $db;
+    $query = $db->prepare("SELECT * FROM users WHERE id = :id");
+    $query->bindParam(":id", $id, PDO::PARAM_INT);
+    $query->execute();
+    return $query->fetch(PDO::FETCH_OBJ);
+}
+
 if ($request_method === "GET") {
 
     $id = isset($_GET['id']) ? Security($_GET['id']) : null;
-    
+
     if ($id !== null) {
         if (empty($id) || !is_numeric($id)) {
             respond_with_error("Invalid or null value!", 406);
         } else {
-            $query = $db->prepare("SELECT * FROM users WHERE id = :id");
-            $query->bindParam(":id", $id, PDO::PARAM_INT);
-            $query->execute();
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $result = getUserById($id);
             if ($result) {
                 $jsonArray["User information"] = $result;
             } else {
@@ -75,27 +80,19 @@ if ($request_method === "GET") {
 } elseif ($request_method === "DELETE") {
 
     $id = Security($_GET['id']);
-    
+
     if (empty($id) || !is_numeric($id)) {
         respond_with_error("Invalid or null value!", 406);
     } else {
-        $query = $db->prepare("SELECT * FROM users WHERE id = :id");
-        $query->bindParam(":id", $id, PDO::PARAM_INT);
-        $query->execute();
-
-        if ($query->rowCount() > 0) {
+        $user = getUserById($id);
+        if ($user) {
             $delete = $db->prepare("DELETE FROM users WHERE id = :id");
             $delete->bindParam(":id", $id, PDO::PARAM_INT);
             $delete->execute();
-
-            if ($delete) {
-                $jsonArray = array_merge($jsonArray, [
-                    'message' => "Deletion successful",
-                    'affectedId' => $id
-                ]);
-            } else {
-                respond_with_error("Deletion failed.", 403);
-            }
+            $jsonArray = array_merge($jsonArray, [
+                'message' => "Deletion successful",
+                'affectedId' => $id
+            ]);
         } else {
             respond_with_error("No value found for your request!", 404);
         }
@@ -104,6 +101,11 @@ if ($request_method === "GET") {
 } elseif ($request_method === "PUT") {
 
     $put_req = json_decode(file_get_contents("php://input"));
+
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        respond_with_error("Invalid JSON format", 400);
+    }
+
     $id = $put_req->id;
     $userName = $put_req->username;
     $firstName = $put_req->first_name;
@@ -117,11 +119,8 @@ if ($request_method === "GET") {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         respond_with_error("Invalid email address.", 406);
     } else {
-        $query = $db->prepare("SELECT * FROM users WHERE id = :id");
-        $query->bindParam(":id", $id, PDO::PARAM_INT);
-        $query->execute();
-
-        if ($query->rowCount() > 0) {
+        $user = getUserById($id);
+        if ($user) {
             $update = $db->prepare("UPDATE users SET username = :uname, first_name = :fname, last_name = :lname, email = :email WHERE id = :id");
             $update->bindParam(":uname", $userName, PDO::PARAM_STR);
             $update->bindParam(":fname", $firstName, PDO::PARAM_STR);
