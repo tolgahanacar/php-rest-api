@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 function HttpStatus(int $code): string {
     $status = [
@@ -55,5 +56,49 @@ function SetHeader(int $code): void {
 }
 
 function Security(string $value): string {
-    return filter_var(trim($value), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+    return htmlspecialchars(trim($value), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+function loadEnv(string $path): void {
+    if (!file_exists($path)) {
+        return;
+    }
+    
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if ($lines === false) {
+        return;
+    }
+    
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if ($line === '' || str_starts_with($line, '#')) {
+            continue;
+        }
+        
+        $parts = explode('=', $line, 2);
+        if (count($parts) === 2) {
+            $key = trim($parts[0]);
+            $value = trim($parts[1]);
+            
+            // Remove inline comments if not starting with quotes
+            if (!str_starts_with($value, '"') && !str_starts_with($value, "'")) {
+                $commentPos = strpos($value, '#');
+                if ($commentPos !== false) {
+                    $value = substr($value, 0, $commentPos);
+                }
+            }
+            $value = trim($value);
+            
+            // Remove outer quotes if present
+            if (str_starts_with($value, '"') && str_ends_with($value, '"')) {
+                $value = substr($value, 1, -1);
+            } elseif (str_starts_with($value, "'") && str_ends_with($value, "'")) {
+                $value = substr($value, 1, -1);
+            }
+            
+            putenv("$key=$value");
+            $_ENV[$key] = $value;
+            $_SERVER[$key] = $value;
+        }
+    }
 }
